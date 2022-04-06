@@ -5,9 +5,9 @@
  * movq %rsi, %rax      // y ==> %rax
  * salq $63, %rax       // << 63
  * sarq $63, %rax       // >> 63
- * xorq %rdi, %rax      // 这个时候的%rdi已经是x*y ^ %rax
- * 因此可以得出结论 (x*y) ^ ((y-z) << 63 >> 63)
+ * xorq %rdi, %rax      // 这个时候的%rdi已经是x*y ^ %rax;但是此时的并不是初始的y;
+ * 因此可以得出结论 (x*(y-z)) ^ ((y-z) << 63 >> 63)
  */
 long decode2(long x, long y, long z) {
-    return (x * y) ^ ((y - z) << 63 >> 63);
+    return (x * (y-z)) ^ ((y - z) << 63 >> 63);
 }
